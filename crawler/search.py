@@ -21,30 +21,30 @@ Listing = namedtuple("Listing", ["id", "url"])
 
 
 def fetch_listing_urls(base_url, lastseen_dt, listing_queue):
-    iteration = 0
+    i = 0
     while True:
         listings_seen = 0
-        url = base_url + "&s={}".format(str(iteration * EXPECTED_COUNT))
+        url = base_url + "&s={}".format(str(i * EXPECTED_COUNT))
 
-        page = urlopen(url)
-        for listing in parse_listings(page, lastseen_dt):
+        html = urlopen(url).read()
+        for listing in parse_listings(html, lastseen_dt):
             listings_seen += 1
             listing_queue.put_nowait(listing)
 
         if listings_seen < EXPECTED_COUNT:
             break
-        iteration += 1
+        i += 1
 
 
-def parse_listings(page, min_time):
-    soup = BeautifulSoup(page.read(), "html.parser")
+def parse_listings(html, min_time):
+    soup = BeautifulSoup(html, "html.parser")
     for row in soup.find_all("li", {"class", RESULTROW_CLASS}):
         id = int(row["data-pid"])
         title_info = row.find("a", {"class", RESULTTITLE_CLASS})
         url = title_info["href"]
-        title = title_info.text
         time = row.find("time", {"class", RESULTDATE_CLASS})["datetime"]
-        price = int(row.find("span", {"class", RESULTPRICE_CLASS}).text[1:])
+        # title = title_info.text
+        # price = int(row.find("span", {"class", RESULTPRICE_CLASS}).text[1:])
         # ignore if older than min time
         if to_datetime(time) <= min_time:
             continue

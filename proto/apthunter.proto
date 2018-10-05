@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+
+package pb;
+
+service Writer {
+  rpc CreateOrUpdate(CreateOrUpdateRequest) returns (CreateOrUpdateResponse) {}
+}
+
+message CreateOrUpdateRequest {
+  string id = 10;
+}
+
+message CreateOrUpdateResponse { }
