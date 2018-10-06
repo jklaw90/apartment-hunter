@@ -9,7 +9,11 @@ MAP_LNG = "data-longitude"
 MAP_LAT = "data-latitude"
 DATE_AVAILABLE = "data-date"
 
-ListingDetails = namedtuple("ListingDetails", ["id", "url", "price", "title", "images", "body", "details", "lng", "lat"])
+ListingDetails = namedtuple(
+    "ListingDetails",
+    ["id", "url", "price", "title", "images", "body", "details", "lng", "lat"],
+)
+
 
 async def worker(name, listing_queue, parsed_queue):
     while True:
@@ -19,9 +23,11 @@ async def worker(name, listing_queue, parsed_queue):
             parsed_queue.put_nowait(parse_listing(html, listing))
         listing_queue.task_done()
 
+
 async def fetch(session, url):
     async with session.get(url) as response:
         return await response.text()
+
 
 def parse_listing(html, listing):
     soup = BeautifulSoup(html, "html.parser")
@@ -32,7 +38,10 @@ def parse_listing(html, listing):
     details = get_details(soup)
     lng, lat = get_cords(soup)
 
-    return ListingDetails(listing.id, listing.url, price, title, images, body, details, lng, lat)
+    return ListingDetails(
+        listing.id, listing.url, price, title, images, body, details, lng, lat
+    )
+
 
 def get_price(soup):
     prices = soup.findAll("span", {"class": "price"})
@@ -44,14 +53,16 @@ def get_price(soup):
     # shouldn't happen based on listings ive seen
     return 0
 
+
 def get_images(soup):
     images = []
     thumbs = soup.find(id="thumbs")
 
     if thumbs:
-        images = [x.get('href') for x in thumbs.findAll('a')]
+        images = [x.get("href") for x in thumbs.findAll("a")]
 
     return images
+
 
 def get_body(soup):
     body = soup.find(id="postingbody")
@@ -61,17 +72,19 @@ def get_body(soup):
 
     return ""
 
+
 def get_cords(soup):
     map_div = soup.find(id=MAP_ID)
 
     if map_div:
         lng = map_div.get(MAP_LNG)
-        lat= map_div.get(MAP_LAT)
+        lat = map_div.get(MAP_LAT)
         return float(lng), float(lat)
 
     return None, None
 
+
 def get_details(soup):
     attr_groups = soup.findAll("p", {"class": "attrgroup"})
-    return [y.text for x in attr_groups for y in x.findAll('span')]
+    return [y.text for x in attr_groups for y in x.findAll("span")]
 

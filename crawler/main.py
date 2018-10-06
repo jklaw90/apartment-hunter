@@ -1,21 +1,24 @@
+import os
 import asyncio
 import random
 import time
+import grpc
 from datetime import datetime, timedelta
 
+import apthunter_pb2 as pb
 from search import fetch_listing_urls
 from listing import worker
+from apthunter_pb2_grpc import WriterStub
 
 
-async def main():
-    url = "https://losangeles.craigslist.org/search/wst/apa?sort=date&availabilityMode=0&max_price=3000"
+async def main(addr, url):
     lastseen_dt = datetime.now() - timedelta(hours=1)
 
     listing_queue = asyncio.Queue()
     parsed_queue = asyncio.Queue()
     fetch_listing_urls(url, lastseen_dt, listing_queue)
 
-    start_dt = datetime.now() 
+    start_dt = datetime.now()
     listing_tasks = []
     for i in range(16):
         task = asyncio.create_task(worker(f"worker-{i}", listing_queue, parsed_queue))
@@ -30,10 +33,29 @@ async def main():
     await asyncio.gather(*listing_tasks, return_exceptions=True)
     total_time = datetime.now() - start_dt
     print("done", total_time, parsed_queue.qsize())
-    while not parsed_queue.empty():
-        info = await parsed_queue.get()
-        print(info)
-        parsed_queue.task_done()
+
+    with grpc.insecure_channel(addr) as channel:
+        stub = WriterStub(channel)
+
+        while not parsed_queue.empty():
+            info = await parsed_queue.get()
+            response = stub.CreateOrUpdate(
+                pb.CreateOrUpdateRequest(
+                    id=info.id,
+                    url=info.url,
+                    price=info.price,
+                    title=info.title,
+                    images=info.images,
+                    body=info.body,
+                    details=info.details,
+                    lng=info.lng,
+                    lat=info.lat,
+                )
+            )
+            print(response)
+            parsed_queue.task_done()
 
 
-asyncio.run(main())
+addr = os.environ.get("WRITER_ADDR", "localhost:9000")
+url = "https://losangeles.craigslist.org/search/wst/apa?sort=date&availabilityMode=0&max_price=3000"
+asyncio.run(main(addr, url))

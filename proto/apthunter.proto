@@ -9,6 +9,14 @@ service Writer {
 
 message CreateOrUpdateRequest {
   string id = 10;
+  string url = 20;
+  float price = 30;
+  string title = 40;
+  repeated string images = 50;
+  string body = 60;
+  repeated string details = 70;
+  float lng = 80;
+  float lat = 90;
 }
 
 message CreateOrUpdateResponse { }

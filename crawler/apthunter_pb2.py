@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"#\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\"\x18\n\x16\x43reateOrUpdateResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"\x97\x01\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\x12\x0b\n\x03url\x18\x14 \x01(\t\x12\r\n\x05price\x18\x1e \x01(\x02\x12\r\n\x05title\x18( \x01(\t\x12\x0e\n\x06images\x18\x32 \x03(\t\x12\x0c\n\x04\x62ody\x18< \x01(\t\x12\x0f\n\x07\x64\x65tails\x18\x46 \x03(\t\x12\x0b\n\x03lng\x18P \x01(\x02\x12\x0b\n\x03lat\x18Z \x01(\x02\"\x18\n\x16\x43reateOrUpdateResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -39,6 +39,62 @@ _CREATEORUPDATEREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='url', full_name='pb.CreateOrUpdateRequest.url', index=1,
+      number=20, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='price', full_name='pb.CreateOrUpdateRequest.price', index=2,
+      number=30, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='title', full_name='pb.CreateOrUpdateRequest.title', index=3,
+      number=40, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='images', full_name='pb.CreateOrUpdateRequest.images', index=4,
+      number=50, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='body', full_name='pb.CreateOrUpdateRequest.body', index=5,
+      number=60, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='details', full_name='pb.CreateOrUpdateRequest.details', index=6,
+      number=70, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lng', full_name='pb.CreateOrUpdateRequest.lng', index=7,
+      number=80, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lat', full_name='pb.CreateOrUpdateRequest.lat', index=8,
+      number=90, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -51,8 +107,8 @@ _CREATEORUPDATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=23,
-  serialized_end=58,
+  serialized_start=24,
+  serialized_end=175,
 )
 
 
@@ -75,8 +131,8 @@ _CREATEORUPDATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=60,
-  serialized_end=84,
+  serialized_start=177,
+  serialized_end=201,
 )
 
 DESCRIPTOR.message_types_by_name['CreateOrUpdateRequest'] = _CREATEORUPDATEREQUEST
@@ -105,8 +161,8 @@ _WRITER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=86,
-  serialized_end=169,
+  serialized_start=203,
+  serialized_end=286,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateOrUpdate',

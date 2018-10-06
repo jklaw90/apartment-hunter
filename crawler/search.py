@@ -39,7 +39,7 @@ def fetch_listing_urls(base_url, lastseen_dt, listing_queue):
 def parse_listings(html, min_time):
     soup = BeautifulSoup(html, "html.parser")
     for row in soup.find_all("li", {"class", RESULTROW_CLASS}):
-        id = int(row["data-pid"])
+        id = row["data-pid"]
         title_info = row.find("a", {"class", RESULTTITLE_CLASS})
         url = title_info["href"]
         time = row.find("time", {"class", RESULTDATE_CLASS})["datetime"]
