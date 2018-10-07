@@ -12,12 +12,14 @@ from apthunter_pb2_grpc import WriterStub
 
 
 async def main(addr, url):
-    lastseen_dt = datetime.now() - timedelta(hours=1)
+    # add 7 hours diff for pst... TODO fix
+    lastseen_dt = datetime.now() - timedelta(hours=1+7)
 
     listing_queue = asyncio.Queue()
     parsed_queue = asyncio.Queue()
     fetch_listing_urls(url, lastseen_dt, listing_queue)
 
+    print("listings found:", listing_queue.qsize())
     start_dt = datetime.now()
     listing_tasks = []
     for i in range(16):
@@ -54,7 +56,7 @@ async def main(addr, url):
             )
             parsed_queue.task_done()
 
-
+print("Starting crawler")
 addr = os.environ.get("WRITER_ADDR", "localhost:9000")
 url = "https://losangeles.craigslist.org/search/wst/apa?sort=date&availabilityMode=0&max_price=3000"
 asyncio.run(main(addr, url))

@@ -37,19 +37,22 @@ def fetch_listing_urls(base_url, lastseen_dt, listing_queue):
 
 
 def parse_listings(html, min_time):
-    soup = BeautifulSoup(html, "html.parser")
-    for row in soup.find_all("li", {"class", RESULTROW_CLASS}):
-        id = row["data-pid"]
-        title_info = row.find("a", {"class", RESULTTITLE_CLASS})
-        url = title_info["href"]
-        time = row.find("time", {"class", RESULTDATE_CLASS})["datetime"]
-        # title = title_info.text
-        # price = int(row.find("span", {"class", RESULTPRICE_CLASS}).text[1:])
-        # ignore if older than min time
-        if to_datetime(time) <= min_time:
-            continue
-
-        yield Listing(id=id, url=url)
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        for row in soup.find_all("li", {"class", RESULTROW_CLASS}):
+            id = row["data-pid"]
+            title_info = row.find("a", {"class", RESULTTITLE_CLASS})
+            url = title_info["href"]
+            time = row.find("time", {"class", RESULTDATE_CLASS})["datetime"]
+            # title = title_info.text
+            # price = int(row.find("span", {"class", RESULTPRICE_CLASS}).text[1:])
+            # ignore if older than min time
+            if to_datetime(time) <= min_time:
+                print(to_datetime(time), min_time)
+                continue
+            yield Listing(id=id, url=url)
+    except Exception as e:
+        print(e)
 
 
 def to_datetime(time):
