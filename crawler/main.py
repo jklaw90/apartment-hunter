@@ -1,10 +1,8 @@
 import os
 import asyncio
-import random
-import time
-import grpc
 from datetime import datetime, timedelta
 
+import grpc
 import apthunter_pb2 as pb
 from search import fetch_listing_urls
 from listing import worker
