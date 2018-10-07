@@ -52,7 +52,6 @@ async def main(addr, url):
                     lat=info.lat,
                 )
             )
-            print(response)
             parsed_queue.task_done()
 
 

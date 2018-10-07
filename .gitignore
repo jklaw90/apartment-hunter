@@ -129,3 +129,4 @@ _testmain.go
 *.prof
 
 .vscode
+bin/
