@@ -10,11 +10,15 @@ service Writer {
 message CreateOrUpdateRequest {
   string id = 10;
   string url = 20;
-  float price = 30;
   string title = 40;
-  repeated string images = 50;
+  float price = 30;
+  float bed = 0;
+  float bath = 0;
+  int64 sqft = 0;
   string body = 60;
-  repeated string details = 70;
+  string wd_type = 0;
+  string parking_type = 0;
+  repeated string images = 50;
   float lng = 80;
   float lat = 90;
 }
