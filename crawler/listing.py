@@ -9,7 +9,7 @@ MAP_LNG = "data-longitude"
 MAP_LAT = "data-latitude"
 DATE_AVAILABLE = "data-date"
 
-WD_HOOKUPS="w/d hookups"
+WD_HOOKUPS = "w/d hookups"
 
 
 ListingDetails = namedtuple(
@@ -18,6 +18,7 @@ ListingDetails = namedtuple(
 )
 
 derp_set = set()
+
 
 async def worker(name, listing_queue, parsed_queue):
     while True:
@@ -89,41 +90,45 @@ def get_cords(soup):
     return None, None
 
 
+Details = namedtuple(
+    "Details",
+    ["bedrooms", "bathrooms", "", "title", "images", "body", "details", "lng", "lat"],
+)
+
+
 def get_details(soup):
     attr_groups = soup.findAll("p", {"class": "attrgroup"})
-    [derp_set.add(y.text.strip()) for x in attr_groups[1:] for y in x.findAll("span")]
-    return [y.text.strip() for x in attr_groups[1:] for y in x.findAll("span")]
+    details = [y.text.strip() for x in attr_groups[1:] for y in x.findAll("span")]
+    return
+
 
 # TODO
-["cats are OK - purrr",
-"dogs are OK - wooof",
-
-"furnished",        
-
-"apartment",
-"condo",
-"cabin",
-"duplex",
-"flat",
-"house",
-"law",
-"loft",
-"townhouse",
-"manufactured",
-"living",
-"land",
-
-"w/d in unit",
-"w/d hookups",
-"laundry in bldg",
-"laundry on site",
-"no laundry on site",
-
-
-"off-street parking",
-"valet parking",
-"street parking",
-"no parking",
-"carport",
-"attached garage",
-"detached garage",]
+[
+    "cats are OK - purrr",
+    "dogs are OK - wooof",
+    "furnished",
+    "apartment",
+    "condo",
+    "cabin",
+    "duplex",
+    "flat",
+    "house",
+    "law",
+    "loft",
+    "townhouse",
+    "manufactured",
+    "living",
+    "land",
+    "w/d in unit",
+    "w/d hookups",
+    "laundry in bldg",
+    "laundry on site",
+    "no laundry on site",
+    "off-street parking",
+    "valet parking",
+    "street parking",
+    "no parking",
+    "carport",
+    "attached garage",
+    "detached garage",
+]
