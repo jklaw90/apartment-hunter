@@ -20,7 +20,7 @@ async def main(addr, url):
     print("listings found:", listing_queue.qsize())
     start_dt = datetime.now()
     listing_tasks = []
-    for i in range(16):
+    for i in range(1000):
         task = asyncio.create_task(worker(f"worker-{i}", listing_queue, parsed_queue))
         listing_tasks.append(task)
 

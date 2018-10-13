@@ -130,3 +130,5 @@ _testmain.go
 
 .vscode
 bin/
+
+vendor/
