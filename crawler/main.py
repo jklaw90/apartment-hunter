@@ -11,7 +11,7 @@ from apthunter_pb2_grpc import WriterStub
 
 async def main(addr, url):
     # add 7 hours diff for pst... TODO fix
-    lastseen_dt = datetime.now() - timedelta(hours=1+7)
+    lastseen_dt = datetime.now() - timedelta(hours=1 + 7)
 
     listing_queue = asyncio.Queue()
     parsed_queue = asyncio.Queue()
@@ -42,17 +42,27 @@ async def main(addr, url):
             response = stub.CreateOrUpdate(
                 pb.CreateOrUpdateRequest(
                     id=info.id,
+                    address=info.address,
                     url=info.url,
-                    price=info.price,
                     title=info.title,
+                    price=info.price,
+                    bedrooms=info.bedrooms,
+                    bathrooms=info.bathrooms,
+                    sqft=info.sqft,
+                    available_date=info.available_date,
+                    cats=info.cats,
+                    dogs=info.dogs,
+                    housing_type=info.housing_type,
+                    wd_type=info.wd_type,
+                    parking_type=info.parking_type,
                     images=info.images,
                     body=info.body,
-                    details=info.details,
                     lng=info.lng,
                     lat=info.lat,
                 )
             )
             parsed_queue.task_done()
+
 
 print("Starting crawler")
 addr = os.environ.get("WRITER_ADDR", "localhost:9000")

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"\x97\x01\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\x12\x0b\n\x03url\x18\x14 \x01(\t\x12\r\n\x05price\x18\x1e \x01(\x02\x12\r\n\x05title\x18( \x01(\t\x12\x0e\n\x06images\x18\x32 \x03(\t\x12\x0c\n\x04\x62ody\x18< \x01(\t\x12\x0f\n\x07\x64\x65tails\x18\x46 \x03(\t\x12\x0b\n\x03lng\x18P \x01(\x02\x12\x0b\n\x03lat\x18Z \x01(\x02\"\x18\n\x16\x43reateOrUpdateResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"\xc1\x02\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x14 \x01(\t\x12\x0b\n\x03url\x18\x1e \x01(\t\x12\r\n\x05title\x18( \x01(\t\x12\r\n\x05price\x18\x32 \x01(\x02\x12\x10\n\x08\x62\x65\x64rooms\x18< \x01(\x03\x12\x11\n\tbathrooms\x18\x46 \x01(\x02\x12\x0c\n\x04sqft\x18P \x01(\x02\x12\x16\n\x0e\x61vailable_date\x18Z \x01(\t\x12\x0c\n\x04\x63\x61ts\x18\x64 \x01(\x08\x12\x0c\n\x04\x64ogs\x18n \x01(\x08\x12\x14\n\x0chousing_type\x18x \x01(\t\x12\x10\n\x07wd_type\x18\x82\x01 \x01(\t\x12\x15\n\x0cparking_type\x18\x8c\x01 \x01(\t\x12\x0f\n\x06images\x18\x96\x01 \x03(\t\x12\r\n\x04\x62ody\x18\xa0\x01 \x01(\t\x12\x0c\n\x03lng\x18\xaa\x01 \x01(\x02\x12\x0c\n\x03lat\x18\xb4\x01 \x01(\x02\"\x18\n\x16\x43reateOrUpdateResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -40,16 +40,16 @@ _CREATEORUPDATEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='url', full_name='pb.CreateOrUpdateRequest.url', index=1,
+      name='address', full_name='pb.CreateOrUpdateRequest.address', index=1,
       number=20, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='price', full_name='pb.CreateOrUpdateRequest.price', index=2,
-      number=30, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='url', full_name='pb.CreateOrUpdateRequest.url', index=2,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -61,36 +61,99 @@ _CREATEORUPDATEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='images', full_name='pb.CreateOrUpdateRequest.images', index=4,
-      number=50, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='price', full_name='pb.CreateOrUpdateRequest.price', index=4,
+      number=50, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='body', full_name='pb.CreateOrUpdateRequest.body', index=5,
-      number=60, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='bedrooms', full_name='pb.CreateOrUpdateRequest.bedrooms', index=5,
+      number=60, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='details', full_name='pb.CreateOrUpdateRequest.details', index=6,
-      number=70, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='bathrooms', full_name='pb.CreateOrUpdateRequest.bathrooms', index=6,
+      number=70, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lng', full_name='pb.CreateOrUpdateRequest.lng', index=7,
+      name='sqft', full_name='pb.CreateOrUpdateRequest.sqft', index=7,
       number=80, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lat', full_name='pb.CreateOrUpdateRequest.lat', index=8,
-      number=90, type=2, cpp_type=6, label=1,
+      name='available_date', full_name='pb.CreateOrUpdateRequest.available_date', index=8,
+      number=90, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cats', full_name='pb.CreateOrUpdateRequest.cats', index=9,
+      number=100, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='dogs', full_name='pb.CreateOrUpdateRequest.dogs', index=10,
+      number=110, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='housing_type', full_name='pb.CreateOrUpdateRequest.housing_type', index=11,
+      number=120, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='wd_type', full_name='pb.CreateOrUpdateRequest.wd_type', index=12,
+      number=130, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='parking_type', full_name='pb.CreateOrUpdateRequest.parking_type', index=13,
+      number=140, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='images', full_name='pb.CreateOrUpdateRequest.images', index=14,
+      number=150, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='body', full_name='pb.CreateOrUpdateRequest.body', index=15,
+      number=160, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lng', full_name='pb.CreateOrUpdateRequest.lng', index=16,
+      number=170, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lat', full_name='pb.CreateOrUpdateRequest.lat', index=17,
+      number=180, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -108,7 +171,7 @@ _CREATEORUPDATEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=24,
-  serialized_end=175,
+  serialized_end=345,
 )
 
 
@@ -131,8 +194,8 @@ _CREATEORUPDATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=177,
-  serialized_end=201,
+  serialized_start=347,
+  serialized_end=371,
 )
 
 DESCRIPTOR.message_types_by_name['CreateOrUpdateRequest'] = _CREATEORUPDATEREQUEST
@@ -161,8 +224,8 @@ _WRITER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=203,
-  serialized_end=286,
+  serialized_start=373,
+  serialized_end=456,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateOrUpdate',

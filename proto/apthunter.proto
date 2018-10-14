@@ -9,18 +9,23 @@ service Writer {
 
 message CreateOrUpdateRequest {
   string id = 10;
-  string url = 20;
+  string address = 20;
+  string url = 30;
   string title = 40;
-  float price = 30;
-  float bed = 0;
-  float bath = 0;
-  int64 sqft = 0;
-  string body = 60;
-  string wd_type = 0;
-  string parking_type = 0;
-  repeated string images = 50;
-  float lng = 80;
-  float lat = 90;
+  float price = 50;
+  int64 bedrooms = 60;
+  float bathrooms = 70;
+  float sqft = 80;
+  string available_date = 90;
+  bool cats = 100;
+  bool dogs = 110;
+  string housing_type = 120;
+  string wd_type = 130;
+  string parking_type = 140;
+  repeated string images = 150;
+  string body = 160;
+  float lng = 170;
+  float lat = 180;
 }
 
 message CreateOrUpdateResponse { }

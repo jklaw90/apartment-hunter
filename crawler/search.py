@@ -44,11 +44,7 @@ def parse_listings(html, min_time):
             title_info = row.find("a", {"class", RESULTTITLE_CLASS})
             url = title_info["href"]
             time = row.find("time", {"class", RESULTDATE_CLASS})["datetime"]
-            # title = title_info.text
-            # price = int(row.find("span", {"class", RESULTPRICE_CLASS}).text[1:])
-            # ignore if older than min time
             if to_datetime(time) <= min_time:
-                print(to_datetime(time), min_time)
                 continue
             yield Listing(id=id, url=url)
     except Exception as e:

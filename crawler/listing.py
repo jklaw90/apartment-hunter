@@ -1,4 +1,5 @@
 import aiohttp
+import re
 from collections import namedtuple
 
 from bs4 import BeautifulSoup
@@ -9,15 +10,29 @@ MAP_LNG = "data-longitude"
 MAP_LAT = "data-latitude"
 DATE_AVAILABLE = "data-date"
 
-WD_HOOKUPS = "w/d hookups"
-
-
 ListingDetails = namedtuple(
     "ListingDetails",
-    ["id", "url", "price", "title", "images", "body", "details", "lng", "lat"],
+    [
+        "id",
+        "address",
+        "url",
+        "price",
+        "title",
+        "images",
+        "body",
+        "bedrooms",
+        "bathrooms",
+        "sqft",
+        "available_date",
+        "cats",
+        "dogs",
+        "housing_type",
+        "wd_type",
+        "parking_type",
+        "lng",
+        "lat",
+    ],
 )
-
-derp_set = set()
 
 
 async def worker(name, listing_queue, parsed_queue):
@@ -27,7 +42,6 @@ async def worker(name, listing_queue, parsed_queue):
             html = await fetch(session, listing.url)
             parsed_queue.put_nowait(parse_listing(html, listing))
         listing_queue.task_done()
-        print(derp_set)
 
 
 async def fetch(session, url):
@@ -37,6 +51,7 @@ async def fetch(session, url):
 
 def parse_listing(html, listing):
     soup = BeautifulSoup(html, "html.parser")
+    address = get_address(soup)
     title = soup.title.string
     price = get_price(soup)
     images = get_images(soup)
@@ -45,8 +60,30 @@ def parse_listing(html, listing):
     lng, lat = get_cords(soup)
 
     return ListingDetails(
-        listing.id, listing.url, price, title, images, body, details, lng, lat
+        listing.id,
+        address,
+        listing.url,
+        price,
+        title,
+        images,
+        body,
+        details.bedrooms,
+        details.bathrooms,
+        details.sqft,
+        details.available_date,
+        details.cats,
+        details.dogs,
+        details.housing_type,
+        details.wd_type,
+        details.parking_type,
+        lng,
+        lat,
     )
+
+
+def get_address(soup):
+    address = soup.find("div", {"class": "mapaddress"}).text
+    return address
 
 
 def get_price(soup):
@@ -90,22 +127,7 @@ def get_cords(soup):
     return None, None
 
 
-Details = namedtuple(
-    "Details",
-    ["bedrooms", "bathrooms", "", "title", "images", "body", "details", "lng", "lat"],
-)
-
-
-def get_details(soup):
-    attr_groups = soup.findAll("p", {"class": "attrgroup"})
-    details = [y.text.strip() for x in attr_groups[1:] for y in x.findAll("span")]
-    return
-
-
-# TODO
-[
-    "cats are OK - purrr",
-    "dogs are OK - wooof",
+HOUSING_TYPES = [
     "furnished",
     "apartment",
     "condo",
@@ -119,11 +141,15 @@ def get_details(soup):
     "manufactured",
     "living",
     "land",
+]
+WD_TYPES = [
     "w/d in unit",
     "w/d hookups",
     "laundry in bldg",
     "laundry on site",
     "no laundry on site",
+]
+PARKING_TYPES = [
     "off-street parking",
     "valet parking",
     "street parking",
@@ -132,3 +158,73 @@ def get_details(soup):
     "attached garage",
     "detached garage",
 ]
+
+
+Details = namedtuple(
+    "Details",
+    [
+        "bedrooms",
+        "bathrooms",
+        "sqft",
+        "available_date",
+        "cats",
+        "dogs",
+        "housing_type",
+        "wd_type",
+        "parking_type",
+    ],
+)
+
+
+def get_details(soup):
+    attr_groups = soup.findAll("p", {"class": "attrgroup"})
+
+    # lazy and bad programming here
+    major_details = [y.text.strip() for x in attr_groups[:1] for y in x.findAll("span")]
+    bedrooms = 0
+    bathrooms = 0.0
+    sqft = 0.0
+    available_date = ""
+    for detail in major_details:
+        if "BR" in detail:
+            bed_bath = get_numbers(detail)
+            if len(bed_bath) == 2:
+                bedrooms = int(bed_bath[0])
+                bathrooms = float(bed_bath[1])
+        elif "ft2" in detail:
+            sqft = float(get_numbers(detail)[0])
+        else:
+            available_date = detail
+
+    details = [y.text.strip() for x in attr_groups[1:] for y in x.findAll("span")]
+    cats = "cats are OK - purrr" in details
+    dogs = "dogs are OK - wooof" in details
+    housing = ""
+    washer_dryer = ""
+    parking = ""
+
+    for detail in details:
+        if detail in HOUSING_TYPES:
+            housing = detail
+        elif detail in WD_TYPES:
+            washer_dryer = detail
+        elif detail in PARKING_TYPES:
+            parking = detail
+
+    return Details(
+        bedrooms,
+        bathrooms,
+        sqft,
+        available_date,
+        cats,
+        dogs,
+        housing,
+        washer_dryer,
+        parking,
+    )
+
+
+def get_numbers(string):
+    numberfromstring = re.findall("\d+\.\d+|\d+", string)
+    return numberfromstring
+
