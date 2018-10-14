@@ -82,7 +82,7 @@ def parse_listing(html, listing):
 
 
 def get_address(soup):
-    address = soup.find("div", {"class": "mapaddress"}).text
+    address = soup.find("div", {"class": "mapaddress"}).text if soup.find("div", {"class": "mapaddress"}) else ""
     return address
 
 

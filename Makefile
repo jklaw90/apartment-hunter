@@ -13,4 +13,4 @@ build:
 	GOARCH=amd64 GOOS=linux CGO_ENABLED=0 go build -a -o ./apartment-hunter/cmd/writer/bin/writer ./apartment-hunter/cmd/writer
 
 docker-up: build
-	docker-compose up
+	docker-compose up --build
