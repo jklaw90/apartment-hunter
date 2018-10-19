@@ -23,6 +23,24 @@ const (
 )
 
 type Created struct {
+	address       string
+	url           string
+	title         string
+	price         float64
+	bedrooms      uint64
+	bathrooms     float64
+	sqft          float64
+	availableDate string
+	cats          bool
+	dogs          bool
+	housingType   string
+	wdType        string
+	parkingType   string
+	images        []string
+	body          string
+	lng           float64
+	lat           float64
+	closed        bool
 }
 
 func (e Created) Type() string {
@@ -30,6 +48,7 @@ func (e Created) Type() string {
 }
 
 type TitleUpdated struct {
+	title string
 }
 
 func (e TitleUpdated) Type() string {
@@ -37,6 +56,7 @@ func (e TitleUpdated) Type() string {
 }
 
 type PriceUpdated struct {
+	price float64
 }
 
 func (e PriceUpdated) Type() string {
@@ -44,6 +64,7 @@ func (e PriceUpdated) Type() string {
 }
 
 type BedroomsUpdated struct {
+	bedrooms uint64
 }
 
 func (e BedroomsUpdated) Type() string {
@@ -51,6 +72,7 @@ func (e BedroomsUpdated) Type() string {
 }
 
 type BathroomsUpdated struct {
+	bathrooms float64
 }
 
 func (e BathroomsUpdated) Type() string {
@@ -58,6 +80,7 @@ func (e BathroomsUpdated) Type() string {
 }
 
 type SqftUpdated struct {
+	sqft float64
 }
 
 func (e SqftUpdated) Type() string {
@@ -65,6 +88,7 @@ func (e SqftUpdated) Type() string {
 }
 
 type AvailabilityDateUpdated struct {
+	availableDate string
 }
 
 func (e AvailabilityDateUpdated) Type() string {
@@ -72,6 +96,7 @@ func (e AvailabilityDateUpdated) Type() string {
 }
 
 type CatsUpdated struct {
+	allowed bool
 }
 
 func (e CatsUpdated) Type() string {
@@ -79,6 +104,7 @@ func (e CatsUpdated) Type() string {
 }
 
 type DogsUpdated struct {
+	allowed bool
 }
 
 func (e DogsUpdated) Type() string {
@@ -86,6 +112,7 @@ func (e DogsUpdated) Type() string {
 }
 
 type HousingUpdated struct {
+	housingType string
 }
 
 func (e HousingUpdated) Type() string {
@@ -93,6 +120,7 @@ func (e HousingUpdated) Type() string {
 }
 
 type WDUpdated struct {
+	wdType string
 }
 
 func (e WDUpdated) Type() string {
@@ -100,6 +128,7 @@ func (e WDUpdated) Type() string {
 }
 
 type ParkingUpdated struct {
+	parkingType string
 }
 
 func (e ParkingUpdated) Type() string {
@@ -107,6 +136,7 @@ func (e ParkingUpdated) Type() string {
 }
 
 type ImagesUpdated struct {
+	images []string
 }
 
 func (e ImagesUpdated) Type() string {
@@ -114,6 +144,7 @@ func (e ImagesUpdated) Type() string {
 }
 
 type BodyUpdated struct {
+	body string
 }
 
 func (e BodyUpdated) Type() string {
@@ -121,6 +152,8 @@ func (e BodyUpdated) Type() string {
 }
 
 type LocationUpdated struct {
+	lng float64
+	lat float64
 }
 
 func (e LocationUpdated) Type() string {

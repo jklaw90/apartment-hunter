@@ -11,7 +11,7 @@ from apthunter_pb2_grpc import WriterStub
 
 async def main(addr, url):
     # add 7 hours diff for pst... TODO fix
-    lastseen_dt = datetime.now() - timedelta(hours=1 + 7)
+    lastseen_dt = datetime.now() - timedelta(hours=1)
 
     listing_queue = asyncio.Queue()
     parsed_queue = asyncio.Queue()

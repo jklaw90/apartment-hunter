@@ -9,12 +9,12 @@ type Service interface {
 }
 
 const (
-	CRAIGSLIST_NAMESPACE = "c0e173e3-b11b-48d1-aa82-554d8505acd5"
+	CRAIGSLIST_NS = "c0e173e3-b11b-48d1-aa82-554d8505acd5"
 )
 
 // GetApartmentUUID Used to convert CL id to our internal id
 func GetApartmentUUID(clID string) string {
-	clNs, err := uuid.FromString(CRAIGSLIST_NAMESPACE)
+	clNs, err := uuid.FromString(CRAIGSLIST_NS)
 	if err != nil {
 		panic(err)
 	}
