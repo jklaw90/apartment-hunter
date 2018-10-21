@@ -21,6 +21,7 @@ func (s *server) CreateOrUpdate(ctx context.Context, in *pb.CreateOrUpdateReques
 
 func main() {
 	env := env.New(env.NewConfig(env.OptionPanicOnMissing).
+		AddEnv("ROOT_NAMESPACE", "67a8e8f0-2369-42a9-afd6-9b5c10f9c669", "project namespace").
 		AddFlagEnv("DEBUG", "debug", "false", "Enable debug logging").
 		AddFlagEnv("LISTEN_ADDR", "listen", ":9000", "GRPC listen port"))
 
