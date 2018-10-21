@@ -30,6 +30,18 @@
   version = "1.2.0"
 
 [[constraint]]
+  branch = "master"
+  name = "github.com/jklaw90/env"
+
+[[constraint]]
+  branch = "feature/refactor"
+  name = "github.com/jklaw90/m2g-server"
+
+[[constraint]]
+  name = "github.com/lib/pq"
+  version = "1.0.0"
+
+[[constraint]]
   name = "github.com/satori/go.uuid"
   version = "1.2.0"
 

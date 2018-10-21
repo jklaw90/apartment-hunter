@@ -2,6 +2,30 @@
 
 
 [[projects]]
+  digest = "1:0cfcded8689c2c964c223650009c5dd9e283c22d57f18f2335aafa16cc22acf1"
+  name = "github.com/go-kit/kit"
+  packages = ["log"]
+  pruneopts = "UT"
+  revision = "ca4112baa34cb55091301bdc13b1420a122b1b9e"
+  version = "v0.7.0"
+
+[[projects]]
+  digest = "1:31a18dae27a29aa074515e43a443abfd2ba6deb6d69309d8d7ce789c45f34659"
+  name = "github.com/go-logfmt/logfmt"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "390ab7935ee28ec6b286364bba9b4dd6410cb3d5"
+  version = "v0.3.0"
+
+[[projects]]
+  digest = "1:586ea76dbd0374d6fb649a91d70d652b7fe0ccffb8910a77468e7702e7901f3d"
+  name = "github.com/go-stack/stack"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a"
+  version = "v1.8.0"
+
+[[projects]]
   digest = "1:5d1b5a25486fc7d4e133646d834f6fca7ba1cef9903d40e7aa786c41b89e9e91"
   name = "github.com/golang/protobuf"
   packages = [
@@ -15,6 +39,45 @@
   pruneopts = "UT"
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:834a6d4e76a0c2fb981fd512677a3adfbe5b3368f04d76baeb6c4ed7ba556cb6"
+  name = "github.com/jklaw90/env"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "feb869bdbb5b104b5508039b900f0009bae12f87"
+
+[[projects]]
+  branch = "feature/refactor"
+  digest = "1:e76d9ef0affc2ae4a2a1caadda32f61af0df2d4c12f3bb92de52e8bd91a51973"
+  name = "github.com/jklaw90/m2g-server"
+  packages = [
+    "pkg/cards/events",
+    "pkg/m2g/data",
+    "pkg/m2g/utils",
+  ]
+  pruneopts = "UT"
+  revision = "a3de2818c8bb2367fecd60efd434844a35b24769"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a64e323dc06b73892e5bb5d040ced475c4645d456038333883f58934abbf6f72"
+  name = "github.com/kr/logfmt"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
+
+[[projects]]
+  digest = "1:8ef506fc2bb9ced9b151dafa592d4046063d744c646c1bbe801982ce87e4bc24"
+  name = "github.com/lib/pq"
+  packages = [
+    ".",
+    "oid",
+  ]
+  pruneopts = "UT"
+  revision = "4ded0e9383f75c197b3a2aaa6d590ac52df6fd79"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
@@ -38,15 +101,15 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "49bb7cea24b1df9410e1712aa6433dae904ff66a"
+  revision = "04a2e542c03f1d053ab3e4d6e5abcd4b66e2be8e"
 
 [[projects]]
   branch = "master"
-  digest = "1:0a40b0bdd57a93e741d8557465be3a2edeec408e9b6399586ad65bbe8e355796"
+  digest = "1:be4f165c438aa39318fd5c8c180a95f4a52524641c0b714638b0fd9fd912b38d"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "fa43e7bc11baaae89f3f902b2b4d832b68234844"
+  revision = "8e24a49d80f82323e1c4db1b5da3e0f31171a151"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -77,7 +140,7 @@
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
   pruneopts = "UT"
-  revision = "af9cb2a35e7f169ec875002c1829c9b315cddc04"
+  revision = "94acd270e44e65579b9ee3cdab25034d33fed608"
 
 [[projects]]
   digest = "1:dc0c170b110c22d9a4eccf08ab58490608053eac450bf456f3aaf9b30a668781"
@@ -121,10 +184,17 @@
   analyzer-version = 1
   input-imports = [
     "github.com/golang/protobuf/proto",
+    "github.com/jklaw90/env",
+    "github.com/jklaw90/m2g-server/pkg/cards/events",
+    "github.com/jklaw90/m2g-server/pkg/m2g/data",
+    "github.com/jklaw90/m2g-server/pkg/m2g/utils",
+    "github.com/lib/pq",
     "github.com/satori/go.uuid",
     "golang.org/x/net/context",
     "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
     "google.golang.org/grpc/reflection",
+    "google.golang.org/grpc/status",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

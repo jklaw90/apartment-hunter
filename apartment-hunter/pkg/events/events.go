@@ -1,4 +1,4 @@
-package writer
+package events
 
 type Event interface {
 	Type() string
@@ -23,24 +23,24 @@ const (
 )
 
 type Created struct {
-	address       string
-	url           string
-	title         string
-	price         float64
-	bedrooms      uint64
-	bathrooms     float64
-	sqft          float64
-	availableDate string
-	cats          bool
-	dogs          bool
-	housingType   string
-	wdType        string
-	parkingType   string
-	images        []string
-	body          string
-	lng           float64
-	lat           float64
-	closed        bool
+	Address       string   `json:"address"`
+	Url           string   `json:"url"`
+	Title         string   `json:"title"`
+	Price         float64  `json:"price"`
+	Bedrooms      uint64   `json:"bedrooms"`
+	Bathrooms     float64  `json:"bathrooms"`
+	Sqft          float64  `json:"sqft"`
+	AvailableDate string   `json:"available_date"`
+	Cats          bool     `json:"cats"`
+	Dogs          bool     `json:"dogs"`
+	HousingType   string   `json:"housing_type"`
+	WdType        string   `json:"wd_type"`
+	ParkingType   string   `json:"parking_type"`
+	Images        []string `json:"images"`
+	Body          string   `json:"body"`
+	Lng           float64  `json:"lng"`
+	Lat           float64  `json:"lat"`
+	Closed        bool     `json:"closed"`
 }
 
 func (e Created) Type() string {
@@ -48,7 +48,7 @@ func (e Created) Type() string {
 }
 
 type TitleUpdated struct {
-	title string
+	Title string `json:"title"`
 }
 
 func (e TitleUpdated) Type() string {
@@ -56,7 +56,7 @@ func (e TitleUpdated) Type() string {
 }
 
 type PriceUpdated struct {
-	price float64
+	Price float64 `json:"price"`
 }
 
 func (e PriceUpdated) Type() string {
@@ -64,7 +64,7 @@ func (e PriceUpdated) Type() string {
 }
 
 type BedroomsUpdated struct {
-	bedrooms uint64
+	Bedrooms uint64 `json:"bedrooms"`
 }
 
 func (e BedroomsUpdated) Type() string {
@@ -72,7 +72,7 @@ func (e BedroomsUpdated) Type() string {
 }
 
 type BathroomsUpdated struct {
-	bathrooms float64
+	Bathrooms float64 `json:"bathrooms"`
 }
 
 func (e BathroomsUpdated) Type() string {
@@ -80,7 +80,7 @@ func (e BathroomsUpdated) Type() string {
 }
 
 type SqftUpdated struct {
-	sqft float64
+	Sqft float64 `json:"sqft"`
 }
 
 func (e SqftUpdated) Type() string {
@@ -88,7 +88,7 @@ func (e SqftUpdated) Type() string {
 }
 
 type AvailabilityDateUpdated struct {
-	availableDate string
+	AvailableDate string `json:"available_date"`
 }
 
 func (e AvailabilityDateUpdated) Type() string {
@@ -96,7 +96,7 @@ func (e AvailabilityDateUpdated) Type() string {
 }
 
 type CatsUpdated struct {
-	allowed bool
+	Allowed bool `json:"allowed"`
 }
 
 func (e CatsUpdated) Type() string {
@@ -104,7 +104,7 @@ func (e CatsUpdated) Type() string {
 }
 
 type DogsUpdated struct {
-	allowed bool
+	Allowed bool `json:"allowed"`
 }
 
 func (e DogsUpdated) Type() string {
@@ -112,7 +112,7 @@ func (e DogsUpdated) Type() string {
 }
 
 type HousingUpdated struct {
-	housingType string
+	HousingType string `json:"housing_type"`
 }
 
 func (e HousingUpdated) Type() string {
@@ -120,7 +120,7 @@ func (e HousingUpdated) Type() string {
 }
 
 type WDUpdated struct {
-	wdType string
+	WdType string `json:"wd_type"`
 }
 
 func (e WDUpdated) Type() string {
@@ -128,7 +128,7 @@ func (e WDUpdated) Type() string {
 }
 
 type ParkingUpdated struct {
-	parkingType string
+	ParkingType string `json:"parking_type"`
 }
 
 func (e ParkingUpdated) Type() string {
@@ -136,7 +136,7 @@ func (e ParkingUpdated) Type() string {
 }
 
 type ImagesUpdated struct {
-	images []string
+	Images []string `json:"images"`
 }
 
 func (e ImagesUpdated) Type() string {
@@ -144,7 +144,7 @@ func (e ImagesUpdated) Type() string {
 }
 
 type BodyUpdated struct {
-	body string
+	Body string `json:"body"`
 }
 
 func (e BodyUpdated) Type() string {
@@ -152,8 +152,8 @@ func (e BodyUpdated) Type() string {
 }
 
 type LocationUpdated struct {
-	lng float64
-	lat float64
+	Lng float64 `json:"lng"`
+	Lat float64 `json:"lat"`
 }
 
 func (e LocationUpdated) Type() string {
