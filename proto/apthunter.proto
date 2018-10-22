@@ -29,7 +29,9 @@ message CreateOrUpdateRequest {
   float lat = 180;
 }
 
-message CreateOrUpdateResponse { }
+message CreateOrUpdateResponse { 
+  string id = 10;
+}
 
 message EndedRequest { }
 

@@ -4,11 +4,22 @@ import (
 	"encoding/json"
 
 	"github.com/jklaw90/apartment-hunter/apartment-hunter/pkg/hunter/data"
-	"github.com/jklaw90/m2g-server/pkg/m2g/utils"
+	"github.com/jklaw90/apartment-hunter/apartment-hunter/pkg/hunter/utils"
+	"github.com/jklaw90/apartment-hunter/apartment-hunter/pkg/writer/events"
 )
 
+type repository struct {
+	eventRepo data.Repository
+}
+
+func NewRepo(eventRepo data.Repository) *repository {
+	return &repository{
+		eventRepo: eventRepo,
+	}
+}
+
 func (r *repository) Read(id string) (*model, error) {
-	var events []Event
+	var respEvents []events.Event
 	aggEvents, err := r.eventRepo.Read(id)
 	if err != nil {
 		if err == data.ErrNotFound {
@@ -17,13 +28,13 @@ func (r *repository) Read(id string) (*model, error) {
 		return nil, err
 	}
 	for _, ae := range aggEvents {
-		e, err := unmarshalEvent(ae.EventType, ae.Event)
+		e, err := events.UnmarshalEvent(ae.EventType, ae.Event)
 		if err != nil {
 			panic(err)
 		}
-		events = append(events, e)
+		respEvents = append(respEvents, e)
 	}
-	return LoadModel(id, events), nil
+	return LoadModel(id, respEvents), nil
 }
 
 func (r *repository) Write(m *model) error {
@@ -38,14 +49,14 @@ func (r *repository) Write(m *model) error {
 		}
 		aggregateEvents = append(aggregateEvents, data.AggregateEvent{
 			ID:          utils.NewUUID(),
-			AggregateID: m.ID,
+			AggregateID: m.ID(),
 			Timestamp:   utils.Timestamp(),
 			Version:     version,
 			EventType:   e.Type(),
 			Event:       jsonData,
 		})
 	}
-	tx, err := r.eventRepo.Write(m.ID, aggregateEvents, m.Version())
+	tx, err := r.eventRepo.Write(m.ID(), aggregateEvents, m.Version())
 	if err != nil {
 		return err
 	}

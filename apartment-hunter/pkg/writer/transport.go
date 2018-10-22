@@ -28,6 +28,28 @@ func (t *GrpcTransport) CreateOrUpdate(ctx context.Context, r *pb.CreateOrUpdate
 	}
 
 	id := GetApartmentUUID(r.GetId())
-	t.service.CreateOrUpdate(id, 0, 0, 0)
-	return nil, nil
+	err := t.service.CreateOrUpdate(
+		id,
+		r.Address,
+		r.Url,
+		r.Title,
+		r.Price,
+		r.Bedrooms,
+		r.Bathrooms,
+		r.Sqft,
+		r.AvailableDate,
+		r.Cats,
+		r.Dogs,
+		r.HousingType,
+		r.WdType,
+		r.ParkingType,
+		r.Images,
+		r.Body,
+		r.Lng,
+		r.Lat,
+		false,
+	)
+	return &pb.CreateOrUpdateResponse{
+		Id: id,
+	}, err
 }

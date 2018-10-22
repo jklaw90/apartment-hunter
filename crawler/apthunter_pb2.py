@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='pb',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"\xc1\x02\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x14 \x01(\t\x12\x0b\n\x03url\x18\x1e \x01(\t\x12\r\n\x05title\x18( \x01(\t\x12\r\n\x05price\x18\x32 \x01(\x02\x12\x10\n\x08\x62\x65\x64rooms\x18< \x01(\x04\x12\x11\n\tbathrooms\x18\x46 \x01(\x02\x12\x0c\n\x04sqft\x18P \x01(\x02\x12\x16\n\x0e\x61vailable_date\x18Z \x01(\t\x12\x0c\n\x04\x63\x61ts\x18\x64 \x01(\x08\x12\x0c\n\x04\x64ogs\x18n \x01(\x08\x12\x14\n\x0chousing_type\x18x \x01(\t\x12\x10\n\x07wd_type\x18\x82\x01 \x01(\t\x12\x15\n\x0cparking_type\x18\x8c\x01 \x01(\t\x12\x0f\n\x06images\x18\x96\x01 \x03(\t\x12\r\n\x04\x62ody\x18\xa0\x01 \x01(\t\x12\x0c\n\x03lng\x18\xaa\x01 \x01(\x02\x12\x0c\n\x03lat\x18\xb4\x01 \x01(\x02\"\x18\n\x16\x43reateOrUpdateResponse\"\x0e\n\x0c\x45ndedRequest\"\x0f\n\rEndedResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0f\x61pthunter.proto\x12\x02pb\"\xc1\x02\n\x15\x43reateOrUpdateRequest\x12\n\n\x02id\x18\n \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x14 \x01(\t\x12\x0b\n\x03url\x18\x1e \x01(\t\x12\r\n\x05title\x18( \x01(\t\x12\r\n\x05price\x18\x32 \x01(\x02\x12\x10\n\x08\x62\x65\x64rooms\x18< \x01(\x04\x12\x11\n\tbathrooms\x18\x46 \x01(\x02\x12\x0c\n\x04sqft\x18P \x01(\x02\x12\x16\n\x0e\x61vailable_date\x18Z \x01(\t\x12\x0c\n\x04\x63\x61ts\x18\x64 \x01(\x08\x12\x0c\n\x04\x64ogs\x18n \x01(\x08\x12\x14\n\x0chousing_type\x18x \x01(\t\x12\x10\n\x07wd_type\x18\x82\x01 \x01(\t\x12\x15\n\x0cparking_type\x18\x8c\x01 \x01(\t\x12\x0f\n\x06images\x18\x96\x01 \x03(\t\x12\r\n\x04\x62ody\x18\xa0\x01 \x01(\t\x12\x0c\n\x03lng\x18\xaa\x01 \x01(\x02\x12\x0c\n\x03lat\x18\xb4\x01 \x01(\x02\"$\n\x16\x43reateOrUpdateResponse\x12\n\n\x02id\x18\n \x01(\t\"\x0e\n\x0c\x45ndedRequest\"\x0f\n\rEndedResponse2S\n\x06Writer\x12I\n\x0e\x43reateOrUpdate\x12\x19.pb.CreateOrUpdateRequest\x1a\x1a.pb.CreateOrUpdateResponse\"\x00\x62\x06proto3')
 )
 
 
@@ -182,6 +182,13 @@ _CREATEORUPDATERESPONSE = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='pb.CreateOrUpdateResponse.id', index=0,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -195,7 +202,7 @@ _CREATEORUPDATERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=347,
-  serialized_end=371,
+  serialized_end=383,
 )
 
 
@@ -218,8 +225,8 @@ _ENDEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=373,
-  serialized_end=387,
+  serialized_start=385,
+  serialized_end=399,
 )
 
 
@@ -242,8 +249,8 @@ _ENDEDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=389,
-  serialized_end=404,
+  serialized_start=401,
+  serialized_end=416,
 )
 
 DESCRIPTOR.message_types_by_name['CreateOrUpdateRequest'] = _CREATEORUPDATEREQUEST
@@ -288,8 +295,8 @@ _WRITER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=406,
-  serialized_end=489,
+  serialized_start=418,
+  serialized_end=501,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateOrUpdate',

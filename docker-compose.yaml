@@ -7,15 +7,15 @@ services:
     environment:
       - DEBUG=true
       - LISTEN_ADDR=0.0.0.0:9000
-  apthunter-crawler:
-    build: ./crawler
-    environment:
-      - DEBUG=true
-      - WRITER_ADDR=apthunter-writer:9000
+  # apthunter-crawler:
+  #   build: ./crawler
+  #   environment:
+  #     - DEBUG=true
+  #     - WRITER_ADDR=apthunter-writer:9000
   postgres:
     build: ./aux/postgres
     ports:
-      - "54320:5432"
+      - "5432:5432"
   nats:
     image: nats:latest
     ports:

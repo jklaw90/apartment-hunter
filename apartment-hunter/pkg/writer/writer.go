@@ -5,7 +5,9 @@ import (
 )
 
 type Service interface {
-	CreateOrUpdate(id string, price, lng, lat float64) (string, error)
+	CreateOrUpdate(clID, address, url, title string, price float32, bedrooms uint64,
+		bathrooms, sqft float32, availableDate string, cats, dogs bool, housingType, wdType, parkingType string,
+		images []string, body string, lng, lat float32, closed bool) error
 }
 
 const (

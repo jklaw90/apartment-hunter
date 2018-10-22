@@ -14,3 +14,7 @@ build:
 
 docker-up: build
 	docker-compose up --build
+
+docker-remove:
+	docker-compose stop
+	docker-compose down --volumes --remove-orphans

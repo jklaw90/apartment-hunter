@@ -26,10 +26,10 @@ type Created struct {
 	Address       string   `json:"address"`
 	Url           string   `json:"url"`
 	Title         string   `json:"title"`
-	Price         float64  `json:"price"`
+	Price         float32  `json:"price"`
 	Bedrooms      uint64   `json:"bedrooms"`
-	Bathrooms     float64  `json:"bathrooms"`
-	Sqft          float64  `json:"sqft"`
+	Bathrooms     float32  `json:"bathrooms"`
+	Sqft          float32  `json:"sqft"`
 	AvailableDate string   `json:"available_date"`
 	Cats          bool     `json:"cats"`
 	Dogs          bool     `json:"dogs"`
@@ -38,8 +38,8 @@ type Created struct {
 	ParkingType   string   `json:"parking_type"`
 	Images        []string `json:"images"`
 	Body          string   `json:"body"`
-	Lng           float64  `json:"lng"`
-	Lat           float64  `json:"lat"`
+	Lng           float32  `json:"lng"`
+	Lat           float32  `json:"lat"`
 	Closed        bool     `json:"closed"`
 }
 
@@ -56,7 +56,7 @@ func (e TitleUpdated) Type() string {
 }
 
 type PriceUpdated struct {
-	Price float64 `json:"price"`
+	Price float32 `json:"price"`
 }
 
 func (e PriceUpdated) Type() string {
@@ -72,7 +72,7 @@ func (e BedroomsUpdated) Type() string {
 }
 
 type BathroomsUpdated struct {
-	Bathrooms float64 `json:"bathrooms"`
+	Bathrooms float32 `json:"bathrooms"`
 }
 
 func (e BathroomsUpdated) Type() string {
@@ -80,7 +80,7 @@ func (e BathroomsUpdated) Type() string {
 }
 
 type SqftUpdated struct {
-	Sqft float64 `json:"sqft"`
+	Sqft float32 `json:"sqft"`
 }
 
 func (e SqftUpdated) Type() string {
@@ -152,8 +152,8 @@ func (e BodyUpdated) Type() string {
 }
 
 type LocationUpdated struct {
-	Lng float64 `json:"lng"`
-	Lat float64 `json:"lat"`
+	Lng float32 `json:"lng"`
+	Lat float32 `json:"lat"`
 }
 
 func (e LocationUpdated) Type() string {

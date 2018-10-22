@@ -1,16 +1,20 @@
 package writer
 
-import "github.com/jklaw90/m2g-server/pkg/cards/events"
+import (
+	"fmt"
+
+	"github.com/jklaw90/apartment-hunter/apartment-hunter/pkg/writer/events"
+)
 
 type model struct {
 	id            string
 	address       string
 	url           string
 	title         string
-	price         float64
+	price         float32
 	bedrooms      uint64
-	bathrooms     float64
-	sqft          float64
+	bathrooms     float32
+	sqft          float32
 	availableDate string
 	cats          bool
 	dogs          bool
@@ -19,8 +23,8 @@ type model struct {
 	parkingType   string
 	images        []string
 	body          string
-	lng           float64
-	lat           float64
+	lng           float32
+	lat           float32
 	closed        bool
 
 	changes []events.Event
@@ -38,6 +42,10 @@ func LoadModel(id string, events []events.Event) *model {
 	return m
 }
 
+func (m *model) ID() string {
+	return m.id
+}
+
 func (m *model) Version() uint32 {
 	return m.version
 }
@@ -47,8 +55,11 @@ func (m *model) GetChanges() []events.Event {
 }
 
 func (m *model) apply(event events.Event, save bool) {
+	fmt.Println("********HERE")
+	fmt.Println(m.id)
 	switch e := event.(type) {
-	case Created:
+
+	case events.Created:
 		m.address = e.Address
 		m.url = e.Url
 		m.title = e.Title
@@ -68,50 +79,52 @@ func (m *model) apply(event events.Event, save bool) {
 		m.lat = e.Lat
 		m.closed = e.Closed
 
-	case TitleUpdated:
+	case events.TitleUpdated:
 		m.title = e.Title
 
-	case PriceUpdated:
+	case events.PriceUpdated:
 		m.price = e.Price
 
-	case BedroomsUpdated:
+	case events.BedroomsUpdated:
 		m.bedrooms = e.Bedrooms
 
-	case BathroomsUpdated:
+	case events.BathroomsUpdated:
 		m.bathrooms = e.Bathrooms
 
-	case SqftUpdated:
+	case events.SqftUpdated:
 		m.sqft = e.Sqft
 
-	case AvailabilityDateUpdated:
+	case events.AvailabilityDateUpdated:
 		m.availableDate = e.AvailableDate
 
-	case CatsUpdated:
+	case events.CatsUpdated:
 		m.cats = e.Allowed
 
-	case DogsUpdated:
+	case events.DogsUpdated:
 		m.dogs = e.Allowed
 
-	case HousingUpdated:
+	case events.HousingUpdated:
 		m.housingType = e.HousingType
 
-	case WDUpdated:
+	case events.WDUpdated:
 		m.wdType = e.WdType
 
-	case ParkingUpdated:
+	case events.ParkingUpdated:
 		m.parkingType = e.ParkingType
 
-	case ImagesUpdated:
+	case events.ImagesUpdated:
 		m.images = e.Images
 
-	case BodyUpdated:
+	case events.BodyUpdated:
 		m.body = e.Body
 
-	case LocationUpdated:
+	case events.LocationUpdated:
 		m.lng = e.Lng
 		m.lat = e.Lat
 
 	default:
+		fmt.Println(e.Type())
+		fmt.Println(e)
 		panic("Invalid Event")
 	}
 
@@ -120,14 +133,14 @@ func (m *model) apply(event events.Event, save bool) {
 	}
 }
 
-func Create(clID, address, url, title string, price float64,
-	bedrooms uint64, bathrooms, sqft float64, availableDate string, cats,
+func Create(id, address, url, title string, price float32,
+	bedrooms uint64, bathrooms, sqft float32, availableDate string, cats,
 	dogs bool, housingType, wdType, parkingType string, images []string,
-	body string, lng, lat float64, closed bool) *model {
+	body string, lng, lat float32, closed bool) *model {
 	m := &model{
-		id: GetApartmentUUID(clID),
+		id: id,
 	}
-	e := Created{
+	e := events.Created{
 		Address:       address,
 		Url:           url,
 		Title:         title,
@@ -152,98 +165,155 @@ func Create(clID, address, url, title string, price float64,
 }
 
 func (m *model) TitleUpdate(title string) {
-	e := TitleUpdated{
+	if m.title == title {
+		return
+	}
+	e := events.TitleUpdated{
 		Title: title,
 	}
 	m.apply(e, true)
 }
 
-func (m *model) PriceUpdate(price float64) {
-	e := PriceUpdated{
+func (m *model) PriceUpdate(price float32) {
+	if m.price == price {
+		return
+	}
+	e := events.PriceUpdated{
 		Price: price,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) BedroomsUpdate(bedrooms uint64) {
-	e := BedroomsUpdated{
+	if m.bedrooms == bedrooms {
+		return
+	}
+	e := events.BedroomsUpdated{
 		Bedrooms: bedrooms,
 	}
 	m.apply(e, true)
 }
 
-func (m *model) BathroomsUpdate(bathrooms float64) {
-	e := BathroomsUpdated{
+func (m *model) BathroomsUpdate(bathrooms float32) {
+	if m.bathrooms == bathrooms {
+		return
+	}
+	e := events.BathroomsUpdated{
 		Bathrooms: bathrooms,
 	}
 	m.apply(e, true)
 }
 
-func (m *model) SqftUpdate(sqft float64) {
-	e := SqftUpdated{
+func (m *model) SqftUpdate(sqft float32) {
+	if m.sqft == sqft {
+		return
+	}
+	e := events.SqftUpdated{
 		Sqft: sqft,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) AvailabilityDateUpdate(date string) {
-	e := AvailabilityDateUpdated{
+	if m.availableDate == date {
+		return
+	}
+	e := events.AvailabilityDateUpdated{
 		AvailableDate: date,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) CatsUpdate(allowed bool) {
-	e := CatsUpdated{
+	if m.cats == allowed {
+		return
+	}
+	e := events.CatsUpdated{
 		Allowed: allowed,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) DogsUpdate(allowed bool) {
-	e := DogsUpdated{
+	if m.dogs == allowed {
+		return
+	}
+	e := events.DogsUpdated{
 		Allowed: allowed,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) HousingUpdate(housingType string) {
-	e := HousingUpdated{
+	if m.housingType == housingType {
+		return
+	}
+	e := events.HousingUpdated{
 		HousingType: housingType,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) WDUpdate(wdType string) {
-	e := WDUpdated{
+	if m.wdType == wdType {
+		return
+	}
+	e := events.WDUpdated{
 		WdType: wdType,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) ParkingUpdate(parkingType string) {
-	e := ParkingUpdated{
+	if m.parkingType == parkingType {
+		return
+	}
+	e := events.ParkingUpdated{
 		ParkingType: parkingType,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) ImagesUpdate(images []string) {
-	e := ImagesUpdated{
+	if len(m.images) == len(images) {
+		if len(images) == 0 {
+			return
+		}
+		var dupe = false
+		for i, img := range m.images {
+			if img != images[i] {
+				dupe = false
+				break
+			} else {
+				dupe = true
+			}
+		}
+		if dupe {
+			return
+		}
+	}
+
+	e := events.ImagesUpdated{
 		Images: images,
 	}
 	m.apply(e, true)
 }
 
 func (m *model) BodyUpdate(body string) {
-	e := BodyUpdated{
+	if m.body == body {
+		return
+	}
+	e := events.BodyUpdated{
 		Body: body,
 	}
 	m.apply(e, true)
 }
 
-func (m *model) LocationUpdate(lng, lat float64) {
-	e := LocationUpdated{
+func (m *model) LocationUpdate(lng, lat float32) {
+	if m.lng == lng && m.lat == lat {
+		return
+	}
+	e := events.LocationUpdated{
 		Lng: lng,
 		Lat: lat,
 	}
