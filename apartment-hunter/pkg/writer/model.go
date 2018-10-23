@@ -1,8 +1,6 @@
 package writer
 
 import (
-	"fmt"
-
 	"github.com/jklaw90/apartment-hunter/apartment-hunter/pkg/writer/events"
 )
 
@@ -55,10 +53,7 @@ func (m *model) GetChanges() []events.Event {
 }
 
 func (m *model) apply(event events.Event, save bool) {
-	fmt.Println("********HERE")
-	fmt.Println(m.id)
 	switch e := event.(type) {
-
 	case events.Created:
 		m.address = e.Address
 		m.url = e.Url
@@ -123,8 +118,6 @@ func (m *model) apply(event events.Event, save bool) {
 		m.lat = e.Lat
 
 	default:
-		fmt.Println(e.Type())
-		fmt.Println(e)
 		panic("Invalid Event")
 	}
 

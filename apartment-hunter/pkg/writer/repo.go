@@ -29,6 +29,7 @@ func (r *repository) Read(id string) (*model, error) {
 	}
 	for _, ae := range aggEvents {
 		e, err := events.UnmarshalEvent(ae.EventType, ae.Event)
+		println(e)
 		if err != nil {
 			panic(err)
 		}
