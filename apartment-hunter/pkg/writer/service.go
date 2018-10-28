@@ -1,7 +1,5 @@
 package writer
 
-import "fmt"
-
 type WriterService struct {
 	repo *repository
 }
@@ -31,7 +29,6 @@ func (s *WriterService) CreateOrUpdate(uuid, address, url, title string, price f
 		return err
 	}
 
-	fmt.Println(m)
 	// Update if needed.
 	m.TitleUpdate(title)
 	m.PriceUpdate(price)
@@ -47,7 +44,6 @@ func (s *WriterService) CreateOrUpdate(uuid, address, url, title string, price f
 	m.ImagesUpdate(images)
 	m.BodyUpdate(body)
 	m.LocationUpdate(lng, lat)
-	fmt.Println(m)
 
 	err = s.repo.Write(m)
 	if err != nil {

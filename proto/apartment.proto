@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+
+package pb;
+
+service Apartment {
+  rpc Get(GetRequest) returns (GetResponse) {}
+}
+
+message GetRequest {
+  string id = 10;
+}
+
+message GetResponse { 
+  string id = 10;
+  string address = 20;
+  string url = 30;
+  string title = 40;
+  float price = 50;
+  uint64 bedrooms = 60;
+  float bathrooms = 70;
+  float sqft = 80;
+  string available_date = 90;
+  bool cats = 100;
+  bool dogs = 110;
+  string housing_type = 120;
+  string wd_type = 130;
+  string parking_type = 140;
+  repeated string images = 150;
+  string body = 160;
+  float lng = 170;
+  float lat = 180;
+}

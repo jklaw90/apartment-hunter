@@ -7,6 +7,7 @@ init:
 
 gen:
 	protoc -I proto/ proto/apthunter.proto --go_out=plugins=grpc:apartment-hunter/pkg/pb
+	protoc -I proto/ proto/apartment.proto --go_out=plugins=grpc:apartment-hunter/pkg/pb
 	python -m grpc_tools.protoc -I./proto --python_out=./crawler --grpc_python_out=./crawler ./proto/apthunter.proto
 
 build:
