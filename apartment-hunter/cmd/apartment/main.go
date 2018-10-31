@@ -28,6 +28,7 @@ func (s *server) Get(ctx context.Context, req *pb.GetRequest) (*pb.GetResponse, 
 func main() {
 	env := env.New(env.NewConfig(env.OptionPanicOnMissing).
 		AddEnv("EVENTS_TOPIC", "apartment-events", "apartments events topic").
+		AddEnv("EVENTS_GROUP", "apartment-group", "group for apartments events topic").
 		AddFlagEnv("DEBUG", "debug", "false", "Enable debug logging").
 		AddFlagEnv("LISTEN_ADDR", "listen", ":9001", "grpc listen port"))
 
@@ -41,7 +42,7 @@ func main() {
 		log.Fatalf("failed to connect to nats: %v", err)
 	}
 
-	nc.Subscribe(env.Get("EVENTS_TOPIC"), func(m *nats.Msg) {
+	nc.QueueSubscribe(env.Get("EVENTS_TOPIC"), env.Get("EVENTS_GROUP"), func(m *nats.Msg) {
 		var aggEvents []data.AggregateEvent
 		json.Unmarshal(m.Data, &aggEvents)
 		for _, aggEvt := range aggEvents {
