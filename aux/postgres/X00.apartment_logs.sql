@@ -11,10 +11,10 @@ CREATE TABLE "public"."apartment_events" (
 CREATE INDEX "index_aggregate_id" ON "public"."apartment_events" USING btree( "aggregate_id" Asc NULLS Last );
 COMMIT;
 
-BEGIN;
-CREATE TABLE "public"."apartments" ( 
-	"id" UUid NOT NULL PRIMARY KEY,
-	"version" Integer NOT NULL,
-	"data" jsonb NOT NULL,
- ;
-COMMIT;
+--BEGIN;
+--CREATE TABLE "public"."apartments" ( 
+--	"id" UUid NOT NULL PRIMARY KEY,
+--	"version" Integer NOT NULL,
+--	"data" jsonb NOT NULL,
+-- ;
+--COMMIT;

@@ -5,7 +5,7 @@ package pb;
 
 service Writer {
   rpc CreateOrUpdate(CreateOrUpdateRequest) returns (CreateOrUpdateResponse) {}
-  //rpc MarkEnded(EndedRequest) returns (EndedResponse) {}
+  rpc Stream(StreamRequest) returns (stream AggregateEvent) {}
 }
 
 message CreateOrUpdateRequest {
@@ -29,10 +29,21 @@ message CreateOrUpdateRequest {
   float lat = 180;
 }
 
-message CreateOrUpdateResponse { 
+message CreateOrUpdateResponse {
   string id = 10;
 }
 
-message EndedRequest { }
+message StreamRequest {
+  string id = 10;
+  string lastSeen = 20;
+}
 
-message EndedResponse { }
+message AggregateEvent{
+  string id = 10;
+  string aggregateId = 20;
+  int64 timestamp = 30;
+  uint32 version = 40;
+  string eventType = 50;
+  bytes event = 60;
+}
+

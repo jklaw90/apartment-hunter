@@ -19,6 +19,11 @@ class WriterStub(object):
         request_serializer=apthunter__pb2.CreateOrUpdateRequest.SerializeToString,
         response_deserializer=apthunter__pb2.CreateOrUpdateResponse.FromString,
         )
+    self.Stream = channel.unary_stream(
+        '/pb.Writer/Stream',
+        request_serializer=apthunter__pb2.StreamRequest.SerializeToString,
+        response_deserializer=apthunter__pb2.AggregateEvent.FromString,
+        )
 
 
 class WriterServicer(object):
@@ -32,6 +37,13 @@ class WriterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Stream(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_WriterServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -39,6 +51,11 @@ def add_WriterServicer_to_server(servicer, server):
           servicer.CreateOrUpdate,
           request_deserializer=apthunter__pb2.CreateOrUpdateRequest.FromString,
           response_serializer=apthunter__pb2.CreateOrUpdateResponse.SerializeToString,
+      ),
+      'Stream': grpc.unary_stream_rpc_method_handler(
+          servicer.Stream,
+          request_deserializer=apthunter__pb2.StreamRequest.FromString,
+          response_serializer=apthunter__pb2.AggregateEvent.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
